@@ -1,15 +1,22 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<title>Intro to v-bind</title>
-		<meta charset="UTF-8">
-		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-		<style>
-			.container{background:#cecece;}
-		</style>
-	</head>
-	<body>
-	
+
+<head>
+	<title>Intro to v-bind</title>
+	<meta charset="UTF-8">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<style>
+		.container {
+			background: #cecece;
+		}
+		.highlight{
+			border: 2px solid yellow;
+		}
+	</style>
+</head>
+
+<body>
+
 	<div id="app">
 		<!--
 		//step 1: open console
@@ -38,25 +45,31 @@
 			1. Create an image and set the following attributes with Vue {src, alt, title}
 			2. Augment the span below to include another class called "highlight", which has a yellow border.
 		-->
-		<span v-bind:class="loadClass">
+		<span v-bind:class="[loadClass]" >
 			look at me!
 		</span>
+		<div class="">
+			<img :src="[image_src]" :alt="[image_alt]" :title="[image_title]" />
+		</div>
+
 	</div>
-	
+
 	<script>
-	var app = new Vue({
-		//Bind Vue object to HTML element through query selector
-		el: '#app',
-		data:{
-			loadClass : 'container',
-			//newStyle : 'font-size:30px;',
-			//newAlt : 'dynamically set alt!'
-			
-		}
-	});
-	
-	
-	
+		var app = new Vue({
+			//Bind Vue object to HTML element through query selector
+			el: '#app',
+			data: {
+				loadClass: 'container highlight',
+				image_src: "https://picsum.photos/200/300",
+				image_alt: "Alt for image",
+				image_title: "Randomly generated image",
+
+			}
+		});
+
+
+
 	</script>
-	</body>
+</body>
+
 </html>

@@ -14,6 +14,14 @@
 	<div id="app">
 		<span v-if="profile">
 			Profile of {{profile.fname}} {{profile.lname}} 
+			<div>
+				<img v-if="profile.pic" v-bind:src="profile.pic" alt="Profile pic" height="300">
+				<img v-else src="https://picsum.photos/200/300/?random" alt="profile pic default" height="300">
+				<p v-if="profile.desc">{{profile.desc}}</p>
+				<p v-else>No description available</p>
+				<p v-if="profile.bio">{{profile.bio}}</p>
+				<p v-else>No bio available</p>
+			</div>
 		</span>
 		<span v-else>
 			No Profile Data found.
@@ -25,12 +33,15 @@
 		el: '#app',
 		
 		data:{
-			/*
+			
 			profile:{
-				fname: "John",
-				lname: "Doe"	
+				fname: "Santhini",
+				lname: "Sasidharan",
+				desc:"I am a Software Engineer",
+				bio:"Currently working as a Software Engineer at Rizort",
+				pic: "https://picsum.photos/200/300/?random"
 			}
-			*/
+			
 		}
 		
 	});

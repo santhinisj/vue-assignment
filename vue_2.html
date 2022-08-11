@@ -1,34 +1,47 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-	<head>
-		<title>v-bind Conditionals</title>
-		<meta charset="UTF-8">
-		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-		<style>
-			.special {background:yellow; border: 1px dotted #fe0000; padding:30px; display:block; text-align:center;}
-			.important {font-weight:bold; font-size:30px;}
-		</style>
-	</head>
-	<body>
-	
-	<div id="app">
-		<span v-bind:class="{special:true, important:isImportant}">
-			look at me!
-		</span>
-	</div>
-	
-	<script>
-	var app = new Vue({
-		el: '#app',
-		data:{
-			isImportant:true
-		}
-	});
-	</script>
-	
-		<!--
+  <head>
+    <title>v-bind Conditionals</title>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+      .special {
+        background: yellow;
+        border: 1px dotted #fe0000;
+        padding: 30px;
+        display: block;
+        text-align: center;
+      }
+
+      .important {
+        font-weight: bold;
+        font-size: 30px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <span v-bind:class="{special:isSpecial, important:isImportant}">
+        look at me!
+      </span>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          isImportant: Math.random() < 0.5,
+          isSpecial: Math.random() < 0.5,
+        },
+      });
+    </script>
+
+    <!--
 		//step 1: Read Code Above
 		//step 2: Will the span have values for special and important?
+		// Yes, true always evaluates to true, so special is always going to be present
+		// class important will be present there according to the value inside data
 		//step 3: execute the code and interpret!
 		
 		v-bind:html_attribute_key="{value:boolean_expression}"
@@ -67,6 +80,5 @@
 		1. Bind the special attribute to "isSpecial" in the data object
 		2. Use the console  to change "isSpecial" and "isImportant" from true to false
 		3. Change "isSpecial" and "isImportant" so they are randomly assigned a Truthy or Falsey value
-		-->
-	</body>
+		--></body>
 </html>

@@ -1,72 +1,72 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-	
-		<title>J1 Practice</title>
-		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-		<style>
-			.formfield{margin-bottom:10px;}
-		</style>
-	</head>
-	<body>
-	<p>Dog Treats Problem. <a href="https://cemc.uwaterloo.ca/contests/computing/2020/index.html">from the J1 problem hosted by the CCC.</a></p>
+
+<head>
+
+	<title>J1 2022 Practice</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<style>
+		.formfield {
+			margin-bottom: 10px;
+		}
+		.calculate{
+			border: 1px solid black;
+			border-radius: 6px;
+			padding: 10px;
+			width: 200px;
+		}
+		#result{
+			margin-top: 20px;
+		}
+	</style>
+</head>
+
+<body>
+	<p>Cupcake Party <a href="https://www.cemc.uwaterloo.ca/contests/computing/past_ccc_contests/2022/index.html">from the J1 problem hosted
+			by the CCC.</a></p>
 	<div id="app">
 		<div class="formfield">
-			<label>Small Treats: <label> <input v-model="treat_qty_small">
+			<label>Regular Boxes: <label> <input v-model="cupcakes_in_regular_box">
 		</div>
 		<div class="formfield">
-			<label>Medium Treats: <label> <input v-model="treat_qty_medium">
-		</div>
-		<div class="formfield">
-			<label>Large Treats: <label> <input v-model="treat_qty_large">
+			<label>Small Boxes: <label> <input v-model="cupcakes_in_small_box">
 		</div>
 		<div id="result">
-			<div><label>show diagnostics:</label><input type="checkbox" v-model="treat_diagnostics"></div>
-			<div v-if="treat_diagnostics">Treat Total: {{treat_total}}</div>
-			<div v-if="treat_diagnostics">Is_Happy: {{is_happy}}</div>
-			<span v-if="is_happy">{{dog_name}} is Happy!</span>
-			<span v-else>{{dog_name}} is sad..</span>
+			<div class="calculate"><label>Calculate Leftover Cupcakes  : </label><input type="checkbox" v-model="are_cupcake_details_entered"></div>
+			<div v-if="are_cupcake_details_entered">Total Cupcakes: {{total_cupcakes}}</div>
+			<div v-if="are_cupcake_details_entered">Total students: {{total_students}}</div>
+			<div v-if="are_cupcake_details_entered">
+				<div v-if="leftover_cupcakes > 0">Leftover Cupcakes: {{leftover_cupcakes}}</div>
+				<div v-else-if="leftover_cupcakes < 0">We are short of {{Math.abs(leftover_cupcakes)}} cupcakes!</div>
+				<div v-else>No cupcakes are left</div>
+			</div>
 		</div>
 	</div>
-	
+
 	<script>
-	var app = new Vue({
-		el: '#app',
-		data:{
-			treat_diagnostics:false,
-			dog_name:"Barley",
-			treat_qty_small:0,
-			treat_qty_medium:0,
-			treat_qty_large:0,
-			treat_value_small:1,
-			treat_value_medium:2,
-			treat_value_large:3
-		},
-		computed:{
-			treat_total:function(){
-				return (this.treat_qty_small * this.treat_value_small) + 
-				(this.treat_qty_medium * this.treat_value_medium) + 
-				(this.treat_qty_large * this.treat_value_large);	
+		var app = new Vue({
+			el: '#app',
+			data: {
+				are_cupcake_details_entered: false,
+				total_students: 28,
+				cupcakes_in_small_box: 0,
+				cupcakes_in_regular_box: 0,
+				capacity_in_small_box: 3,
+				capacity_in_regular_box: 8,
 			},
-			is_happy:function(){
-				
-				return this.treat_total>=10;	
+			computed: {
+				total_cupcakes: function () {
+					return (this.capacity_in_small_box * this.cupcakes_in_small_box) +
+						(this.capacity_in_regular_box * this.cupcakes_in_regular_box);
+				},
+				leftover_cupcakes: function () {
+
+					return this.total_cupcakes - this.total_students;
+				}
 			}
-		}
-	});
-	
+		});
+
 	</script>
-	<!--
-		v-model will allow you to quickly bind form elements to the data property.
-		Make sure to set a default value!
-		The Computed property can be used like data, except for values that are calculated from data properties.
-		In this example 'treat_total' is computed from data properties, and 'is_happy' is computed from 'treat_total'.
-		
-		ASYNCHRONOUS LEARNING EXERCISE : J1
-		- Find any J1 problem
-		- Imagine an interface that allows the user to enter data on the webpage
-		- Build using v-model and computed properties!
-	
-	-->
-	</body>
+</body>
+
 </html>

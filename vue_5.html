@@ -1,44 +1,69 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-	<head>
-		<title>v-on Event Handlers</title>
-		<meta charset="UTF-8">
-		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-		<style>
-			.box{width:200px; height:200px; background:green; border:2px solid black; text-align:center; line-height:200px; color:white;}
-			.hidden{display:none;}
-		</style>
-	</head>
-	<body>
-	
-	<div id="app">
-		<div v-bind:class="{box:true, hidden:boxHidden}">{{message}}</div>
-		<button v-on:click="showhide();">Click</button>
-	</div>
-	
-	<script>
-	var app = new Vue({
-		el: '#app',
-		
-		data:{
-			boxHeight:200,
-			boxHidden : false,
-			message  : 'Make me disappear!'
-		},
-		methods:{
-			showhide : function(){
-				console.log(this.boxHidden);
-				if(this.boxHidden){
-					this.boxHidden=false;
-				}else{
-					this.boxHidden=true;	
-				}
-			}
-		}
-		
-	});
-	</script>
-	<!--
+  <head>
+    <title>v-on Event Handlers</title>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+      .box {
+        width: 200px;
+        height: 200px;
+        background: green;
+        border: 2px solid black;
+        text-align: center;
+        line-height: 200px;
+        color: white;
+      }
+      .hidden {
+        display: none;
+      }
+      .redBox {
+        background: red;
+        width: 100px;
+        height: 100px;
+        margin-top: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div v-bind:class="{box:true, hidden:boxHidden}">{{message}}</div>
+      <button v-on:click="showhide();">
+        <span v-if="boxHidden">Show</span><span v-else>Hide</span>
+      </button>
+      <div
+        v-bind:class="{redBox:true}"
+        :style="{height:boxHeight+'px'}"
+        v-on:mouseover="makeBoxTaller();"
+      ></div>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+
+        data: {
+          boxHeight: 200,
+          boxHidden: false,
+          message: "Make me disappear!",
+        },
+        methods: {
+          showhide: function () {
+            console.log(this.boxHidden);
+            if (this.boxHidden) {
+              this.boxHidden = false;
+            } else {
+              this.boxHidden = true;
+            }
+          },
+          makeBoxTaller: function () {
+			console.log("makeBoxTaller");
+            this.boxHeight = this.boxHeight + 10;
+          },
+        },
+      });
+    </script>
+    <!--
 		Step 1: Read the code above
 		Step 2: What will happen when you click the button?
 		Step 3: Run it and find out!
@@ -57,6 +82,6 @@
 		2. Make a red box 100px * 100px that becomes 10px taller every time you hover over it
 		
 	
-	-->	
-	</body>
+	-->
+  </body>
 </html>
